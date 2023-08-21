@@ -14,6 +14,7 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 
+
 const val WIDTH = 600
 const val HEIGHT = 600
 
