@@ -1,6 +1,7 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material.Button
@@ -26,8 +27,12 @@ fun MainApp() {
     var text by remember { mutableStateOf("Hello, World!") }
 
     MaterialTheme {
-        Box(modifier = Modifier.offset(60.dp,60.dp)){
-
+        Row(modifier = Modifier.offset(60.dp,60.dp)){
+            Button(modifier = Modifier.offset(60.dp,60.dp),onClick = {
+                text = "Hello, Tony!"
+            }) {
+                Text(text)
+            }
         }
         Button(modifier = Modifier.offset(60.dp,60.dp),onClick = {
             text = "Hello, Tony!"
