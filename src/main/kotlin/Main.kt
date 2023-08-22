@@ -1,18 +1,19 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.offset
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPosition
-import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
+import base.AppConfig
+import moe.tlaster.precompose.PreComposeWindow
+import moe.tlaster.precompose.navigation.rememberNavigator
+import org.succlz123.lib.imageloader.core.ImageLoader
+import router.NCNavigatorManager
+import ui.common.theme.AppTheme
+import ui.common.theme.themeTypeState
+import ui.main.MainPage
+import util.EnvUtil
+import java.awt.Dimension
+import java.io.File
 
 
 const val WIDTH = 600
@@ -20,39 +21,35 @@ const val HEIGHT = 600
 
 @Composable
 @Preview
-fun mainApp() {
-    var text by remember { mutableStateOf("Hello, World!") }
-
-    MaterialTheme {
-        Row(modifier = Modifier.offset(60.dp,60.dp)){
-            Button(modifier = Modifier.offset(60.dp,60.dp),onClick = {
-                text = "Hello, Tony!"
-            }) {
-                Text(text)
-            }
-        }
-        Button(modifier = Modifier.offset(60.dp,60.dp),onClick = {
-            text = "Hello, Tony!"
-        }) {
-            Text(text)
-        }
-        Button(onClick = {
-            text = "Hello, Tony!"
-        }) {
-            Text(text)
-        }
-
+private fun mainApp() {
+    AppTheme(themeTypeState.value) {
+        NCNavigatorManager.navigator = rememberNavigator()
+        MainPage()
     }
-
 }
 
 fun main() = application {
 
+    initImageLoader()
+    val windowState = rememberWindowState(size = DpSize(AppConfig.windowMinWidth, AppConfig.windowMinHeight))
+    PreComposeWindow(
+        state = windowState,
+        onCloseRequest = ::exitApplication,
+        undecorated = EnvUtil.isWindows(),
+        title = ""
+    ) {
+        window.minimumSize = Dimension(AppConfig.windowMinWidth.value.toInt(), AppConfig.windowMinHeight.value.toInt())
+        window.rootPane.apply {
+            rootPane.putClientProperty("apple.awt.fullWindowContent", true)
+            rootPane.putClientProperty("apple.awt.transparentTitleBar", true)
+            rootPane.putClientProperty("apple.awt.windowTitleVisible", false)
 
-    // 设置是否居中显示
-    val state = WindowState(size = DpSize(WIDTH.dp, HEIGHT.dp), position = WindowPosition.Aligned(Alignment.Center))
-    val title = "Welcome to Tony's Home!"
-    Window(onCloseRequest = ::exitApplication, state = state, resizable = true, title = title) {
+        }
         mainApp()
+
     }
+}
+
+private fun initImageLoader() {
+    ImageLoader.configuration(rootDirectory = File(AppConfig.cacheRootDir))
 }

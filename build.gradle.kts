@@ -18,10 +18,21 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
-//    implementation("com.google.devtools.ksp:symbol-processing-api:1.9.0-1.0.11")
+    //    implementation("com.google.devtools.ksp:symbol-processing-api:1.9.0-1.0.11")
+
+
+    implementation("com.google.zxing:javase:3.3.3")
+    implementation("moe.tlaster:precompose:1.3.14")
+    implementation("androidx.datastore:datastore-preferences-core:1.1.0-dev01")
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("io.github.succlz123:compose-imageloader-desktop:0.0.2")
+
+    implementation("uk.co.caprica:vlcj:4.7.3")
 }
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>{
-    kotlinOptions.jvmTarget="17"
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "17"
 }
 
 kotlin {
@@ -30,18 +41,18 @@ kotlin {
 
 
     sourceSets {
-        val main by getting{
-            dependencies{
-                implementation("com.google.zxing:javase:3.3.3")
-                implementation("moe.tlaster:precompose:1.3.14")
-                implementation("androidx.datastore:datastore-preferences-core:1.1.0-dev01")
-
-                implementation("com.squareup.retrofit2:retrofit:2.9.0")
-                implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-                implementation("io.github.succlz123:compose-imageloader-desktop:0.0.2")
-                implementation("uk.co.caprica:vlcj:4.7.3")
-            }
+        val main by getting {
+            // dependencies {
+            //     implementation("com.google.zxing:javase:3.3.3")
+            //     implementation("moe.tlaster:precompose:1.3.14")
+            //     implementation("androidx.datastore:datastore-preferences-core:1.1.0-dev01")
+            //
+            //     implementation("com.squareup.retrofit2:retrofit:2.9.0")
+            //     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+            //     implementation("io.github.succlz123:compose-imageloader-desktop:0.0.2")
+            //
+            //     implementation("uk.co.caprica:vlcj:4.7.3")
+            // }
         }
         val test by getting
     }
@@ -51,12 +62,12 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb,TargetFormat.Exe)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
             packageName = "ComposeDemo"
             packageVersion = "1.0.0"
             modules("java.instrument", "java.sql", "jdk.unsupported")
 
-            macOS{
+            macOS {
                 // a version for all macOS distributables
                 packageVersion = "1.0.0"
                 // a version only for the dmg package
@@ -72,7 +83,7 @@ compose.desktop {
                 // a build version only for the pkg package
                 pkgPackageBuildVersion = "1.0.0"
                 // 设置图标
-                iconFile.set(project.file("images/icon.icns"))
+                iconFile.set(project.file("icons/icon.icns"))
             }
             windows {
                 // a version for all Windows distributables
@@ -82,7 +93,7 @@ compose.desktop {
                 // a version only for the exe package
                 exePackageVersion = "1.0.0"
                 // 设置图标
-                iconFile.set(project.file("images/icon.ico"))
+                iconFile.set(project.file("icons/icon.ico"))
             }
         }
     }
