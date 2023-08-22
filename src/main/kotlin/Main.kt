@@ -20,7 +20,7 @@ const val HEIGHT = 600
 
 @Composable
 @Preview
-fun MainApp() {
+fun mainApp() {
     var text by remember { mutableStateOf("Hello, World!") }
 
     MaterialTheme {
@@ -53,6 +53,6 @@ fun main() = application {
     val state = WindowState(size = DpSize(WIDTH.dp, HEIGHT.dp), position = WindowPosition.Aligned(Alignment.Center))
     val title = "Welcome to Tony's Home!"
     Window(onCloseRequest = ::exitApplication, state = state, resizable = true, title = title) {
-        MainApp()
+        mainApp()
     }
 }
