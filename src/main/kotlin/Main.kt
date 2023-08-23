@@ -1,6 +1,8 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import base.AppConfig
@@ -31,7 +33,11 @@ private fun mainApp() {
 fun main() = application {
 
     initImageLoader()
-    val windowState = rememberWindowState(size = DpSize(AppConfig.windowMinWidth, AppConfig.windowMinHeight))
+    val windowState = rememberWindowState(
+        size = DpSize(AppConfig.windowMinWidth, AppConfig.windowMinHeight), position = WindowPosition(
+            Alignment.Center
+        )
+    )
     PreComposeWindow(
         state = windowState,
         onCloseRequest = ::exitApplication,
@@ -51,5 +57,7 @@ fun main() = application {
 }
 
 private fun initImageLoader() {
+    // 加载图像缓存地址
     ImageLoader.configuration(rootDirectory = File(AppConfig.cacheRootDir))
+    // println(AppConfig.cacheRootDir)
 }
