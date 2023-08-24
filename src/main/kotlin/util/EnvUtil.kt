@@ -2,6 +2,11 @@ package util
 
 import java.util.*
 
+
+/**
+ * 环境工具库
+ * 用于获取系统类型
+ */
 object EnvUtil {
     val osName = System.getProperty("os.name", "generic")
 

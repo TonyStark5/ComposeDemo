@@ -33,11 +33,13 @@ private fun mainApp() {
 fun main() = application {
 
     initImageLoader()
+    // 窗口状态初始化
     val windowState = rememberWindowState(
         size = DpSize(AppConfig.windowMinWidth, AppConfig.windowMinHeight), position = WindowPosition(
             Alignment.Center
         )
     )
+    // 预窗口状态设置
     PreComposeWindow(
         state = windowState,
         onCloseRequest = ::exitApplication,
@@ -45,6 +47,7 @@ fun main() = application {
         title = ""
     ) {
         window.minimumSize = Dimension(AppConfig.windowMinWidth.value.toInt(), AppConfig.windowMinHeight.value.toInt())
+        // 窗口根组件属性设置，填满整个窗口、去除标题框
         window.rootPane.apply {
             rootPane.putClientProperty("apple.awt.fullWindowContent", true)
             rootPane.putClientProperty("apple.awt.transparentTitleBar", true)
