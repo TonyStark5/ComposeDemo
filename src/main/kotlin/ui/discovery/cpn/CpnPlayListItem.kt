@@ -19,8 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.gson.Gson
 import model.PlaylistDetail
-import moe.tlaster.precompose.navigation.NavOptions
-import router.NCNavigatorManager
+import router.TNavigatorManager
 import router.RouterUrls
 import ui.common.AsyncImage
 import ui.common.theme.AppColorsProvider
@@ -33,7 +32,7 @@ import util.StringUtil
 @Composable
 fun CpnPlayListItem(item: PlaylistDetail) {
     var focusState by remember { mutableStateOf(false) }
-    val navigator = NCNavigatorManager.navigator
+    val navigator = TNavigatorManager.navigator
 
     Column(
         modifier = Modifier.onPointerEvent(PointerEventType.Enter) {

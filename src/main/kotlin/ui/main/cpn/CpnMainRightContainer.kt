@@ -3,7 +3,6 @@ package ui.main.cpn
 import androidx.compose.foundation.background
 import ui.common.onClick
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.onClick
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -19,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import base.AppConfig
 import base.MusicPlayController
-import router.NCNavigatorManager
+import router.TNavigatorManager
 import router.NavGraph
 import router.RouterUrls
 import ui.common.theme.AppColorsProvider
@@ -59,7 +58,7 @@ fun CommonTitleBar(
             } else {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (showBackButton) {
-                        val navigator = NCNavigatorManager.navigator
+                        val navigator = TNavigatorManager.navigator
 
                         Icon(
                             painterResource("icons/ic_back.webp"),
@@ -100,7 +99,7 @@ private fun BoxScope.CpnRightTopActionButtons() {
             painterResource("icons/ic_setting.webp"),
             contentDescription = null,
             modifier = Modifier.padding(end = 14.dp).size(24.dp).padding(3.dp).onClick {
-                NCNavigatorManager.navigator.navigate(RouterUrls.SETTING)
+                TNavigatorManager.navigator.navigate(RouterUrls.SETTING)
             },
             tint = AppColorsProvider.current.firstIcon
         )

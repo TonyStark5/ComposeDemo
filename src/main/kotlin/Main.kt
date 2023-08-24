@@ -9,7 +9,7 @@ import base.AppConfig
 import moe.tlaster.precompose.PreComposeWindow
 import moe.tlaster.precompose.navigation.rememberNavigator
 import org.succlz123.lib.imageloader.core.ImageLoader
-import router.NCNavigatorManager
+import router.TNavigatorManager
 import ui.common.theme.AppTheme
 import ui.common.theme.themeTypeState
 import ui.main.MainPage
@@ -25,7 +25,7 @@ const val HEIGHT = 600
 @Preview
 private fun mainApp() {
     AppTheme(themeTypeState.value) {
-        NCNavigatorManager.navigator = rememberNavigator()
+        TNavigatorManager.navigator = rememberNavigator()
         MainPage()
     }
 }

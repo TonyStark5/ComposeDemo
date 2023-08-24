@@ -15,7 +15,7 @@ import ui.play.CpnCurrentPlayListSheet
  */
 @Composable
 fun MainPage() {
-
+    // 纵向布局，组件自适应充满窗体
     Column {
         Box(modifier = Modifier.weight(1f)) {
             Row(modifier = Modifier.fillMaxSize()) {

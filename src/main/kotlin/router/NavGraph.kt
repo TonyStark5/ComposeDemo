@@ -16,13 +16,14 @@ import ui.setting.SettingPage
 import ui.todo.TodoPage
 
 
-object NCNavigatorManager {
+object TNavigatorManager {
     lateinit var navigator: Navigator
 }
 
 @Composable
 fun NavGraph() {
-    val navigator = NCNavigatorManager.navigator
+    val navigator = TNavigatorManager.navigator
+    // 导航栏设定
     NavHost(
         navigator = navigator,
         navTransition = remember {
@@ -71,7 +72,7 @@ fun NavGraph() {
             SettingPage()
         }
 
-        scene("${RouterUrls.PLAY_LIST_DETAIL}") { backStackEntry ->
+        scene(RouterUrls.PLAY_LIST_DETAIL) { backStackEntry ->
             val simplePlayListInfo = backStackEntry.query<String>("simplePlayListInfo")
             val simplePlayListItem = Gson().fromJson(simplePlayListInfo, SimplePlayListItem::class.java)
             PlayListDetailPage(simplePlayListItem)

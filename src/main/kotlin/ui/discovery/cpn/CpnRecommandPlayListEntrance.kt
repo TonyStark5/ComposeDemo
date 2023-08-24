@@ -22,7 +22,7 @@ import com.google.gson.Gson
 import http.NCRetrofitClient
 import model.RecommendPlayListResult
 import model.SimplePlayListItem
-import router.NCNavigatorManager
+import router.TNavigatorManager
 import router.RouterUrls
 import ui.common.*
 import ui.common.theme.AppColorsProvider
@@ -30,7 +30,6 @@ import util.StringUtil
 import base.BaseViewModel
 import base.ViewState
 import base.ViewStateMutableStateFlow
-import moe.tlaster.precompose.navigation.NavOptions
 
 /**
  * 个性推荐-推荐歌单入口
@@ -70,7 +69,7 @@ private fun CpnPlayListItem(item: SimplePlayListItem) {
         }.onClick {
             val url = "${RouterUrls.PLAY_LIST_DETAIL}?simplePlayListInfo=${Gson().toJson(item)}"
             println("navigate to PLAY_LIST_DETAIL, url=$url")
-            NCNavigatorManager.navigator.navigate(url)
+            TNavigatorManager.navigator.navigate(url)
         },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

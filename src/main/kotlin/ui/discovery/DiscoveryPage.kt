@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.dp
 import base.MusicPlayController
 import moe.tlaster.precompose.ui.viewModel
 import moe.tlaster.precompose.viewmodel.ViewModel
-import router.NCNavigatorManager
 import ui.common.CommonTabLayout
 import ui.common.CommonTabLayoutStyle
 import ui.common.theme.AppColorsProvider

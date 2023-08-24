@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 import model.PlaylistDetail
 import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.ui.viewModel
-import router.NCNavigatorManager
+import router.TNavigatorManager
 import router.RouterUrls
 import ui.common.AsyncImage
 import ui.common.theme.AppColorsProvider
@@ -39,7 +39,7 @@ import ui.common.onClick
  */
 @Composable
 fun CpnMainLeftMenu() {
-    val navigator = NCNavigatorManager.navigator
+    val navigator = TNavigatorManager.navigator
     val loginResult = UserManager.getLoginResultFlow().collectAsState(null).value
     val viewModel: MainLeftMenuViewModel = viewModel { MainLeftMenuViewModel() }
     LaunchedEffect(loginResult) {
@@ -96,7 +96,6 @@ fun CpnMainLeftMenu() {
             }
             CpnMenuItem(viewModel, "icons/ic_collect.webp", "我的收藏") {
                 navigator.navigate(RouterUrls.MY_COLLECT, NavOptions(launchSingleTop = true))
-
             }
             viewModel.selfCreatePlayList?.let {
                 CpnSongSheet("创建的歌单", it)
@@ -153,7 +152,7 @@ private fun CpnSongSheetItem(viewModel: MainLeftMenuViewModel, icon: String, pla
     CpnMenuItem(viewModel, icon, playlistDetail.name, type = 1) {
         val url = "${RouterUrls.PLAY_LIST_DETAIL}?simplePlayListInfo=${Gson().toJson(playlistDetail.convertToSimple())}"
         println("navigate to PLAY_LIST_DETAIL, url=$url")
-        NCNavigatorManager.navigator.navigate(url)
+        TNavigatorManager.navigator.navigate(url)
     }
 }
 
@@ -254,8 +253,8 @@ private fun ColumnScope.CpnSongSheet(title: String, list: List<PlaylistDetail>) 
     }
 
     Column(modifier = Modifier.fillMaxWidth().height((40f * animValue.value * list.size).dp)) {
-        for (i in 0 until list.size) {
-            CpnSongSheetItem(viewModel, "icons/ic_song_sheet.webp", list[i])
+        for (element in list) {
+            CpnSongSheetItem(viewModel, "icons/ic_song_sheet.webp", element)
         }
 
     }
@@ -278,10 +277,10 @@ private fun LogoutButton() {
                     if (viewModel.selectedSongSheetTag != null) {
                         viewModel.selectedSongSheetTag = null
                         viewModel.selectedMenuTag = "发现音乐"
-                        while (NCNavigatorManager.navigator.canGoBack) {
-                            NCNavigatorManager.navigator.popBackStack()
+                        while (TNavigatorManager.navigator.canGoBack) {
+                            TNavigatorManager.navigator.popBackStack()
                         }
-                        NCNavigatorManager.navigator.navigate(RouterUrls.DISCOVERY, NavOptions(launchSingleTop = true))
+                        TNavigatorManager.navigator.navigate(RouterUrls.DISCOVERY, NavOptions(launchSingleTop = true))
                     }
                 }
             }) {
