@@ -168,6 +168,7 @@ private fun CpnMenuItem(
     type: Int = 0,
     onClick: (title: Any) -> Unit
 ) {
+    // 设置排列格式，如间距等
     Row(
         modifier = Modifier.fillMaxWidth().height(40.dp).onClick {
             if (type == 0) {
@@ -207,6 +208,9 @@ private fun CpnMenuItem(
     }
 }
 
+/**
+ * 基础组件之我的音乐部分
+ */
 @Composable
 private fun CpnMyMusicTitle() {
     Text(
