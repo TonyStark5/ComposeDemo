@@ -18,6 +18,9 @@ object NCRetrofitClient {
     }
 }
 
+/**
+ * 设置请求配置
+ */
 object RetrofitClient {
     const val BASE_URL = "https://ncmusic.sskevan.cn"
     private const val CONNECT_TIMEOUT = 30L
